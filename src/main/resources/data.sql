@@ -1,0 +1,1 @@
+insert into ip (adress) values ('dummy');
