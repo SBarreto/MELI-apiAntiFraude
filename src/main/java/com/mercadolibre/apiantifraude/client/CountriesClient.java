@@ -1,50 +1,31 @@
 package com.mercadolibre.apiantifraude.client;
 
+import com.mercadolibre.apiantifraude.client.response.CountryCurrencyResponse;
 import com.mercadolibre.apiantifraude.config.ConfigBinder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import java.net.URL;
-
-@NoArgsConstructor
+/**
+ * Cliente encargado de buscar la informacion de monedas para un pais
+ */
 @Service
 public class CountriesClient {
 
-    @Autowired
-    private ConfigBinder configBinder;
-    private RestTemplate restTemplate;
-    private String url;
+//    private RestTemplate restTemplate;
+    private final ConfigBinder configBinder;
+    private final WebClient webClient;
 
-    @Autowired
-    public CountriesClient (RestTemplateBuilder builder) {
-        this.restTemplate = builder.build();
+    public CountriesClient(WebClient.Builder webClientBuilder, ConfigBinder configBinder) {
+        this.configBinder = configBinder;
+        this.webClient = webClientBuilder.baseUrl(this.configBinder.getUrlCountries()).build();
     }
 
-    public void getCountry() {
-        //String url = "https://restcountries.com/v3.1/name/peru";
-        Object object = restTemplate.getForObject(configBinder.getUrlCountries()+"name/peru", Object.class);
-        System.out.println(object.toString());
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public RestTemplate getRestTemplate() {
-        return restTemplate;
-    }
-
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public CountryCurrencyResponse[] getCountryInfo(String country) {
+       return webClient
+                .get()
+                .uri("/v3.1/name/".concat(country))
+                .retrieve()
+                .bodyToMono(CountryCurrencyResponse[].class)
+                .block();
     }
 }
