@@ -1,12 +1,11 @@
 package com.mercadolibre.apiantifraude.dto;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * DTO para respuesta de peticion de informacion de IP
@@ -15,9 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class IpCountryDTO {
+public class IpInfoDTO {
     private String adress;
     private String country;
     private String isoCode;
-    private List<String> currencies;
+    private Map<String, String> currenciesExchange;
 }

@@ -22,7 +22,7 @@ public class IpClient {
     public IpResponse getIpInfo(String ip) {
         return webClient
                 .get()
-                .uri(ip.concat("?access_key="))
+                .uri(ip.concat("?access_key=7fdabc21e744d227cfb39d70cc8b3e83"))
                 .retrieve()
                 .bodyToMono(IpResponse.class)
                 .block();
