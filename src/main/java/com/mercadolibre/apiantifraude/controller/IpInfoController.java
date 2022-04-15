@@ -1,7 +1,7 @@
 package com.mercadolibre.apiantifraude.controller;
 
 import com.mercadolibre.apiantifraude.dto.IpInfoDTO;
-import com.mercadolibre.apiantifraude.service.IpInfoService;
+import com.mercadolibre.apiantifraude.service.GetIpInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IpInfoController {
 
     @Autowired
-    private IpInfoService ipInfoService;
+    private GetIpInfoService ipInfoService;
 
     @GetMapping("meli/api/ipinfo/{ip}")
     IpInfoDTO getIpInfo(@PathVariable String ip) {

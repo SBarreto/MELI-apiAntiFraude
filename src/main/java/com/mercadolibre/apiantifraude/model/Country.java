@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
@@ -19,17 +16,17 @@ import java.util.List;
 public class Country {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "country_generator")
     private long id;
 
     private String name;
 
     private String isoCode;
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country", cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<Ip> ipList;
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country", cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<Currency> currencies;
 
 }

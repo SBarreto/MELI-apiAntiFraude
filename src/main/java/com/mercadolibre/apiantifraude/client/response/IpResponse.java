@@ -16,6 +16,9 @@ import lombok.Setter;
 @Setter
 public class IpResponse {
 
+    @JsonProperty("ip")
+    private String ip;
+
     @JsonProperty("country_name")
     private String countryName;
 
