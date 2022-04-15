@@ -26,7 +26,7 @@ public class Country {
     @OneToMany(mappedBy = "country", cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<Ip> ipList;
 
-    @OneToMany(mappedBy = "country", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @OneToMany(mappedBy = "country", cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Currency> currencies;
 
 }
