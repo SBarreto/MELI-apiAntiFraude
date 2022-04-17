@@ -10,8 +10,8 @@ public interface IpRepository extends CrudRepository<Ip, Long> {
             "Ip i where i.adress =:ipAdress")
     boolean existsByIp(String ipAdress);
 
-    @Query("Select i from Ip i where i.country =:countryId")
-    Ip findByCountryId(long countryId);
+    @Query("Select i from Ip i where i.adress =:ipAdress")
+    Ip findByIp(String ipAdress);
 
     @Query("SELECT CASE WHEN COUNT(i) > 0 THEN true ELSE false END FROM " +
             "Ip i where i.adress =:ipAdress and i.active=false")

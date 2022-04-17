@@ -24,4 +24,6 @@ public class CurrencyExchangeResponse {
         currencyRates = rates.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> String.valueOf(e.getValue())));
     }
+
+
 }

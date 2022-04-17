@@ -1,5 +1,6 @@
 package com.mercadolibre.apiantifraude.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,10 @@ public class Ip {
 
     @ManyToOne
     @JoinColumn(name = "country_id")
+    @JsonIgnore
     private Country country;
 
+    @Column(unique = true)
     private String adress;
 
     private boolean active;

@@ -31,7 +31,7 @@ public class SaveIpInfoService {
      */
     public boolean saveIpInfoIfNew(IpInfoDTO ipInfoDTO) {
 
-        if (ipRepository.existsByIp(ipInfoDTO.getAdress())){
+        if (!ipRepository.existsByIp(ipInfoDTO.getAdress())){
             countryRepository.save(buildpersistanceData(ipInfoDTO));
             return true;
         } else
@@ -43,8 +43,11 @@ public class SaveIpInfoService {
      * @param ipAdress
      */
     public Ip saveBlackListedIp(String ipAdress) {
-        Ip ip = new Ip();
-        ip.setAdress(ipAdress);
+        Ip ip = ipRepository.findByIp(ipAdress);
+        if (ip==null) {
+            ip = new Ip();
+            ip.setAdress(ipAdress);
+        }
         ip.setActive(false);
         return ipRepository.save(ip);
     }
