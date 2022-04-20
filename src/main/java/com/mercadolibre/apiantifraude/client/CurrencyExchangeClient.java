@@ -19,7 +19,7 @@ public class CurrencyExchangeClient {
     public CurrencyExchangeResponse getexChangeRateInfo(String currencies) {
         return webClient
                 .get()
-                .uri("/api/latest?access_key=807f4e834d2fc9c10e58c67872fe9b47&symbols=".concat(currencies))
+                .uri("/api/latest?access_key=&symbols=".concat(currencies))
                 .retrieve()
                 .bodyToMono(CurrencyExchangeResponse.class)
                 .block();

@@ -26,7 +26,6 @@ public class SaveIpInfoService {
      * Guarda informacion de Ip si no existe en base de datos
      * Retorna true si la entidad es guardada
      * Retorna false si ya existe
-     *
      * @param ipInfoDTO
      */
     public boolean saveIpInfoIfNew(IpInfoDTO ipInfoDTO) {
